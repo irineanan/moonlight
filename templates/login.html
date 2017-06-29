@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="static/css/bootstrap.css">
+</head>
+<body>
+
+     <ul class="nav nav-pills">
+         <li><a href="/">Add User</a></li>
+         <li class="active"><a href="/login">Sign In</a></li>
+     </ul>
+
+<div class="row">
+         <div class="col-md-4 col-md-offset-4">
+         {% with messages = get_flashed_messages()  %}
+            {% if messages %}
+                  {% for item in messages %}
+                     <h3 class="text_danger">{{ item }}</h3>
+                   {% endfor %}
+            {% endif %}
+         {% endwith %}
+
+             <form action="/login" method="post">
+                 {{ form.hidden_tag() }}
+                 {% for field in form %}
+                     <div class="form-group">
+                     {{ field(placeholder = field.label.text, class_="form-control") }}
+                     </div>
+                     {% if field.errors %}
+                         {% for error in field.errors %}
+                            <p class="text-danger">
+                              {{ error }}
+                            </p>
+                         {% endfor %}
+
+                     {% endif %}
+                 {% endfor %}
+                 <button class="btn btn-info btn-block" type="submit">Log In</button>
+             </form>
+         </div>
+     </div>
+ </div>
+</body>
+</html>

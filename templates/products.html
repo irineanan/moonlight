@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MOONLIGHT PRODUCTS</title>
+</head>
+
+<body>
+<ul class="nav nav-pills">
+         <li class="active"><a href="/">Add User</a></li>
+         <li><a href="/login">Sign In</a></li>
+     </ul>
+    <a href="/logout" class = "btn btn-info">Sign out</a>
+<div class="row">
+    <table class="table">
+       <tr>
+           <td>NAME</td>
+           <td>QUANTITY</td>
+           <td>PRICE</td>
+           <td>OWNER</td>
+            <td>DATE_ADDED</td>
+       </tr>
+
+
+  </table>
+</div>
+
+{% for product in products %}
+  <tr>
+      <td>{{ product.names }}</td>
+      <td>{{ product.quantity }}</td>
+      <td>{{ product.price }}</td>
+      <td>{{ product.owner }}</td>
+      <td>{{ product.date_added }}</td>
+  </tr>
+
+
+{% endfor %}
+
+
+</body>
+</html>
