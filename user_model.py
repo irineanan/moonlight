@@ -22,6 +22,8 @@ class Product(Model):
     date_added = DateField( default = datetime.today())
     class Meta:
         database = db
+
+
 # User.create_table()
 # Product.drop_table()
 # Product.create_table()

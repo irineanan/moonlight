@@ -11,3 +11,8 @@ class MyForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(message="Enter your email address please!"),Email(message="Invalid Email!")])
     password = PasswordField("Password", validators=[DataRequired(message="Enter Password")])
+
+class ProductForm(FlaskForm):
+    names = StringField("Product name", validators=[DataRequired(message="Enter Product Name please!"), Length(min=4)])
+    quantity  = IntegerField("Quantity", validators=[DataRequired(message="Enter Quantity"), NumberRange(min=1, max=1000, message="Quantity must be between 1 and 1000")])
+    price  = IntegerField("Price", validators=[DataRequired(message="Enter Price"), NumberRange(min=1, max=1000, message="Price must be between 1 and 1000")])

@@ -1,10 +1,10 @@
 from flask import Flask,render_template,flash,session,redirect,url_for
-from load import MyForm, LoginForm
+from load import MyForm, LoginForm,ProductForm
 from user_model import User, Product
 from flask_bcrypt import generate_password_hash, check_password_hash
 from peewee import OperationalError
 app = Flask(__name__)
-app.secret_key="AsdFghJklMnOp"
+app.secret_key="As35QRWRT67675"
 
 
 @app.route('/', methods=("GET", "POST"))
@@ -43,6 +43,23 @@ def login():
              flash("Wrong username or password")
     return render_template("login.html", form=form)
 
+
+
+
+
+@app.route("/addproduct", methods=("GET", "POST"))
+def addproducts():
+    if "names" not in session:
+        return redirect(url_for("login"))
+    form=ProductForm()
+    if form.validate_on_submit():
+        names=form.names.data
+        price=form.price.data
+        quantity=form.quantity.data
+        Product.create(names=names, price=price, quantity=quantity, owner=session ["id"])
+        return redirect(url_for("products"))
+    return render_template("addproduct.html", form=form)
+
 @app.route("/products")
 def products():
     if "names" not in session:
@@ -59,14 +76,15 @@ def logout():
     return redirect(url_for("login"))
 
 
-# if __name__ == '__main__':
-#
-#     try:
-#         Product.create_table()
-#     except OperationalError:
-#         pass
-#     try:
-#      User.create_table()
-#     except OperationalError:
-#         pass
-#     app.run(host="0.0.0.0", port=8000)
+
+if __name__ == '__main__':
+
+    try:
+        Product.create_table()
+    except OperationalError:
+        pass
+    try:
+     User.create_table()
+    except OperationalError:
+        pass
+    app.run(host="0.0.0.0", port=8000)

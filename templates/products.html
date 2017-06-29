@@ -3,14 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>MOONLIGHT PRODUCTS</title>
+     <link rel="stylesheet" href="static/css/bootstrap.css">
 </head>
 
 <body>
-<ul class="nav nav-pills">
-         <li class="active"><a href="/">Add User</a></li>
-         <li><a href="/login">Sign In</a></li>
+     <ul class="nav nav-pills">
+         <li  class="active"><a href="/products">View Product</a></li>
+         <li><a href="/addproduct">Add Product</a></li>
+         <li><a href="/logout">Sign Out</a></li>
      </ul>
-    <a href="/logout" class = "btn btn-info">Sign out</a>
+ <div class="container">
 <div class="row">
     <table class="table">
        <tr>
@@ -21,21 +23,20 @@
             <td>DATE_ADDED</td>
        </tr>
 
+        {% for product in products %}
+          <tr>
+              <td>{{ product.names }}</td>
+              <td>{{ product.quantity }}</td>
+              <td>{{ product.price }}</td>
+              <td>{{ product.owner }}</td>
+              <td>{{ product.date_added }}</td>
+          </tr>
 
+        {% endfor %}
   </table>
 </div>
+</div>
 
-{% for product in products %}
-  <tr>
-      <td>{{ product.names }}</td>
-      <td>{{ product.quantity }}</td>
-      <td>{{ product.price }}</td>
-      <td>{{ product.owner }}</td>
-      <td>{{ product.date_added }}</td>
-  </tr>
-
-
-{% endfor %}
 
 
 </body>
